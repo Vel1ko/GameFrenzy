@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 
-def meny_window(theme):
+def create_window(theme):
     sg.theme(theme)
     sg.set_options(font = 'Franklin 15', button_element_size=(4,4))
     button_size = (8,6)
@@ -12,7 +12,7 @@ def meny_window(theme):
     return sg.Window('meny', layout)
 
 theme_menu = ['menu',['DarkBlue14', 'DarkGrey6', 'DarkRed']]
-window = meny_window('DarkRed')
+window = create_window('menu')
 
 while True:
     event, values = window.read()

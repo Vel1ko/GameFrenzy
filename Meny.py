@@ -18,5 +18,8 @@ while True:
     event, values = window.read()
     if event == sg.WIN_CLOSED:
         break
+    elif event == 'DarkBlue14' or event == 'DarkGrey6' or event == 'DarkRed':
+        window.close()
+        window = create_window(event)
 
 window.close()

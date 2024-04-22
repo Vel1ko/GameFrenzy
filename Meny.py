@@ -1,15 +1,22 @@
 import PySimpleGUI as sg
 
-def meny_window(DarkBlue14):
-    sg.theme('DarkBlue14')
+def meny_window(theme):
+    sg.theme(theme)
     sg.set_options(font = 'Franklin 15', button_element_size=(4,4))
-    button_size = (4,4)
+    button_size = (8,6)
     layout = [
-        [sg.Button('uno', size = button_size),sg.Button('Dos', size = button_size),sg.Button('tres', size = button_size)],
+        [sg.Text('GameFrenzy', font = 'Franklin 30', justification = 'center', right_click_menu= theme_menu)],
+        [sg.Button('Spel 1', size = button_size),sg.Button('Spel 2', size = button_size),sg.Button('Spel 3', size = button_size)],
     ]
 
-    window =  sg.Window('meny', layout)
-    event, values = window.read()
-    window.close()
+    return sg.Window('meny', layout)
 
-meny_window('Darkblue14')
+theme_menu = ['menu',['DarkBlue14', 'DarkGrey6', 'DarkRed']]
+window = meny_window('DarkRed')
+
+while True:
+    event, values = window.read()
+    if event == sg.WIN_CLOSED:
+        break
+
+window.close()

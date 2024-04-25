@@ -1,11 +1,14 @@
 
 def ssp():
+
     import PySimpleGUI as sg
     import random
+
+    sg.theme('DarkGrey13')
     layout = [ 
-        [sg.Text('Sten ,Sax, påse')],
-        [sg.Image(filename='rockpic.png', key = 'image', size= (100,200))],
-        [sg.Button('Rock'), sg.Button('Paper'), sg.Button('Scissors')],
+        [sg.Text('Sten Sax Påse', font = 'Franklin 30', justification= 'center')],
+        [sg.Image(r'C:\Users\veljko.jovic\Desktop\Python Uppgifter\GameFrenzy\ROCK_PIC.png', size = (150, 200)),sg.Image(r''),sg.Image(r'')],
+        [sg.Button('Rock'), sg.Push(), sg.Push(), sg.Push(), sg.Button('Paper'), sg.Push(), sg.Push(), sg.Push(), sg.Button('Scissors')],
         [sg.Text(size=(20,1), key='-RESULT-')],
         [sg.Button('Avsluta')]
     ]
@@ -22,5 +25,6 @@ def ssp():
             computer_choice = random.choice(['Rock', 'Paper', 'Scissors'])
             winner = (user_choice, computer_choice)
             window['-RESULT-'].update(winner)
+            
 
 ssp()

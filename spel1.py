@@ -19,7 +19,7 @@ def ssp():
         elif event in ('Rock', 'Paper', 'Scissors'):
             user_choice = event.lower()
             computer_choice = random.choice(['Rock', 'Paper', 'Scissors'])
-            winner = determine_winner(user_choice, computer_choice)
+            winner = (user_choice, computer_choice)
             window['-RESULT-'].update(winner)
 
 ssp()

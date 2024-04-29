@@ -1,11 +1,31 @@
 import PySimpleGUI as sg
+from time import time
+from random import randint
 
+def convert_pos_to_pixel(cell):
+    tl = cell[0] * CELL_SIZE, cell[1] * CELL_SIZE
+    br = tl[0] + CELL_SIZE, tl[1] + CELL_SIZE
+    return tl, br
+
+def place_munch():
+    munch_pos = randint(0, CELL_NUM -1), randint(0, CELL_NUM -1)
+    while munch_pos in snake_body:
+        munch_pos = randint(0, CELL_NUM -1), randint(0, CELL_NUM -1)
+    return munch_pos
+#konstanterna
 FIELD_SIZE = 400
 CELL_NUM = 10
 CELL_SIZE = FIELD_SIZE / CELL_NUM
 
 
-munch = (2,4)
+#Snake
+snake_body = [(4,4),(3,4),(2,4)]
+DIRECTIONS = {'left': (-1,0),'right': (1,0), 'up' :(0,1), 'down':(0,-1)}
+direction = DIRECTIONS ['up']
+
+#Frukt
+munch_pos = place_munch()
+munch_eaten = False
 
 sg.theme('DarkGreen')
 field = sg.Graph(
@@ -19,21 +39,51 @@ layout = [[field]]
 
 window = sg.Window('snake', layout, return_keyboard_events = True)
 
+start_time = time()
+
 while True:
-    event, values = window.read()
+    event, values = window.read(timeout = 10)
     if event == sg.WIN_CLOSED:
         break
 
     if event == 'Left:37':
-        print('left')
+        direction = DIRECTIONS ['left']
 
     if event == 'Right:39':
-        print('right')
+        direction = DIRECTIONS ['right']
 
     if event == 'Up:38':
-        print('top')
+        direction = DIRECTIONS ['up']
 
     if event == 'Down:40':
-        print('down')
+        direction = DIRECTIONS ['down']
+    
+    time_since_start = time() - start_time
+    if time_since_start >= 0.5:
+        start_time = time()
+
+        #munch snake collision
+        if snake_body[0] == munch_pos:
+            munch_pos = place_munch()
+            munch_eaten = True
+            
+
+        #Snake update
+        new_head = (snake_body[0][0] + direction[0],snake_body[0][1] + direction[1])
+        snake_body.insert(0,new_head)
+        if not munch_eaten:
+            snake_body.pop()
+        apple_eaten = False
+    
+        field.DrawRectangle((0,0),(FIELD_SIZE,FIELD_SIZE), 'black')
+
+        tl, br = convert_pos_to_pixel(munch_pos)
+        field.DrawRectangle(tl,br,'red')
+
+        #Snake drawn
+        for index, part in enumerate(snake_body):
+            tl, br = convert_pos_to_pixel(part)
+            color = 'DarkGreen' if index == 0 else 'green'
+            field.DrawRectangle(tl,br,color)
 
 window.close()

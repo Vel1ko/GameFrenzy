@@ -8,6 +8,7 @@ def create_window(theme):
     button_size = (8,6)
     layout = [
         [sg.Text('GameFrenzy', font = 'Franklin 30', justification = 'center', right_click_menu= theme_menu)],
+        [sg.Text('Change theme by right click', font = 'Franklin 8', right_click_menu= theme_menu)],
         [sg.Button('Sten sax påse', size = button_size),sg.Button('Snake', size = button_size),sg.Button('Spel 3', size = button_size)],
     ]
 

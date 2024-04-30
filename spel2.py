@@ -28,12 +28,12 @@ def snake_game():
     munch_pos = place_munch()
     munch_eaten = False
 
-    sg.theme('DarkGreen')
+    sg.theme('DarkBlue')
     field = sg.Graph(
         canvas_size = (FIELD_SIZE,FIELD_SIZE),
         graph_bottom_left = (0,0),
         graph_top_right = (FIELD_SIZE,FIELD_SIZE),
-        background_color= 'Black'
+        background_color= 'PaleGreen1'
     )
 
     layout = [[field]]
@@ -82,7 +82,7 @@ def snake_game():
             not 0 <= snake_body[0][1] <= CELL_NUM -1:
                 break
         
-            field.DrawRectangle((0,0),(FIELD_SIZE,FIELD_SIZE), 'black')
+            field.DrawRectangle((0,0),(FIELD_SIZE,FIELD_SIZE), 'PaleGreen1')
 
             tl, br = convert_pos_to_pixel(munch_pos)
             field.DrawRectangle(tl,br,'red')

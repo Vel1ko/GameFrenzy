@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 from spel1 import ssp
+from spel2 import snake_game
 
 def create_window(theme):
     sg.theme(theme)
@@ -7,7 +8,7 @@ def create_window(theme):
     button_size = (8,6)
     layout = [
         [sg.Text('GameFrenzy', font = 'Franklin 30', justification = 'center', right_click_menu= theme_menu)],
-        [sg.Button('Sten sax påse', size = button_size),sg.Button('Spel 2', size = button_size),sg.Button('Spel 3', size = button_size)],
+        [sg.Button('Sten sax påse', size = button_size),sg.Button('Snake', size = button_size),sg.Button('Spel 3', size = button_size)],
     ]
 
     return sg.Window('meny', layout)
@@ -25,5 +26,8 @@ while True:
 
     if event == 'Sten sax påse':
         ssp()
+    
+    if event == 'Snake':
+        snake_game()
 
 window.close()

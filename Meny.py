@@ -30,5 +30,5 @@ while True:
     
     if event == 'Snake':
         snake_game()
-
+        
 window.close()

@@ -94,5 +94,3 @@ def snake_game():
                 field.DrawRectangle(tl,br,color)
 
     window.close()
-
-snake_game()

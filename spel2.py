@@ -90,7 +90,7 @@ def snake_game():
             #Snake drawn
             for index, part in enumerate(snake_body):
                 tl, br = convert_pos_to_pixel(part)
-                color = 'SpringGreen2' if index == 0 else 'SpringGreen3'
+                color = 'Springgreen4' if index == 0 else 'limeGreen'
                 field.DrawRectangle(tl,br,color)
 
     window.close()

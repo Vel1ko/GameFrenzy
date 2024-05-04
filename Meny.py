@@ -33,7 +33,7 @@ while True:
         snake_game()
     
     if event == 'Spel 3':
-        game333()
+        ()
     
     if event == 'Google':
         webbrowser.open_new('https://www.google.com')

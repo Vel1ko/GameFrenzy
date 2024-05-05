@@ -1,5 +1,6 @@
 import pygame
 from sys import exit
+from random import randint
 
 
 pygame.init()
@@ -25,9 +26,21 @@ def display_score():
     screen.blit(score_surf,score_rect)
     return tiden
 
+def hinder_movement(hinder_list):
+    if hinder_list:
+        for hidner_rect in hinder_list:
+            hidner_rect.x -= 6
+
+            screen.blit(enemy_scale,hidner_rect)
+
+        return hinder_list
+    else: return []
+    
 enemy_surf = pygame.image.load('GameFrenzy/lava.png').convert_alpha()
 enemy_scale = pygame.transform.scale(enemy_surf, (100,65))
 enemy_rect = enemy_scale.get_rect(topleft = (600,265))
+
+hinder_rect_list = []
 
 boulder_surf = pygame.image.load('GameFrenzy/boulderbro.png').convert_alpha()
 boulder_scale = pygame.transform.scale(boulder_surf, (100,100))
@@ -38,10 +51,15 @@ boulder_gravity = 0
 boulder_stilla = pygame.image.load('Gamefrenzy/boulderbro.png').convert_alpha()
 boulder_stilla_scale = pygame.transform.scale(boulder_stilla, (125,125))
 boulder_stilla_rect = boulder_stilla_scale.get_rect(center = (400,200))
+
 title_surf = spel_font.render('BoulderBro', False, (0,0,0))
 title_rect = title_surf.get_rect(center = (400,100))
+
 spel_message = spel_font.render('Press Space To Play', False, (0,0,0))
 spel_message_rect = spel_message.get_rect(center = (400,315))
+
+hinder_timer = pygame.USEREVENT + 1
+pygame.time.set_timer(hinder_timer, 1500)
 
 #While loop som arbeter med att hålla fönstret öpen
 while True:
@@ -58,20 +76,28 @@ while True:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE and boulder_rect.bottom >= 325:
                     boulder_gravity = -20
+
+            if event.type == hinder_timer and game_active:
+                hinder_rect_list.append(enemy_scale.get_rect(topleft = (randint(900,1100),265)))
+
         else:
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 game_active = True
                 enemy_rect.left = 800
                 start_time = int(pygame.time.get_ticks() / 1000)
 
+    
+
     if game_active:
         screen.blit(backdrop_scale,(0,0))
         screen.blit(ground_scale,(0,250))
         points = display_score()
 
-        enemy_rect.left -= 6
-        if enemy_rect.left < -100: enemy_rect.left = 850
-        screen.blit(enemy_scale,enemy_rect)
+        
+
+        #enemy_rect.left -= 6
+        #if enemy_rect.left < -100: enemy_rect.left = 850
+        #screen.blit(enemy_scale,enemy_rect)
         
         #Spelare
         boulder_gravity += 0.85
@@ -79,6 +105,9 @@ while True:
         if boulder_rect.bottom >= 325:
             boulder_rect.bottom = 325
         screen.blit(boulder_scale, boulder_rect)
+
+        #enemy movement
+        hinder_rect_list = hinder_movement(hinder_rect_list)
 
         # death
         if enemy_rect.colliderect(boulder_rect):

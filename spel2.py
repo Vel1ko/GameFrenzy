@@ -22,7 +22,7 @@ def snake_game():
     #Snake
     snake_body = [(4,4),(3,4),(2,4)]
     DIRECTIONS = {'left': (-1,0),'right': (1,0), 'up' :(0,1), 'down':(0,-1)}
-    direction = DIRECTIONS ['up']
+    direction = DIRECTIONS ['right']
 
     #Frukt
     munch_pos = place_munch()

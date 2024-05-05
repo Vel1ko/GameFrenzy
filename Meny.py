@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 from spel1 import ssp
 from spel2 import snake_game
 import webbrowser
+from spel3 import boulderBroGame
 
 def create_window(theme):
     sg.theme(theme)
@@ -10,7 +11,7 @@ def create_window(theme):
     layout = [
         [sg.Text('GameFrenzy', font = 'Franklin 30', justification = 'center', right_click_menu= theme_menu)],
         [sg.Text('Change theme by right click', font = 'Franklin 8', right_click_menu= theme_menu)],
-        [sg.Button('Sten sax påse', size = button_size),sg.Button('Snake', size = button_size),sg.Button('Spel 3', size = button_size),sg.Button('Google', size = button_size)],
+        [sg.Button('Sten sax påse', size = button_size),sg.Button('Snake', size = button_size),sg.Button('BoulderBro', size = button_size),sg.Button('Google', size = button_size)],
     ]
 
     return sg.Window('meny', layout)
@@ -32,8 +33,8 @@ while True:
     if event == 'Snake':
         snake_game()
     
-    if event == 'Spel 3':
-        ()
+    if event == 'BoulderBro':
+        boulderBroGame()
     
     if event == 'Google':
         webbrowser.open_new('https://www.google.com')
